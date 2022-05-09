@@ -90,38 +90,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 // console.log(dragged.childNodes[1].value)
-                if (dragged.parentNode.id == encours.id) {
-                    
-
-                    let carteId = dragged.childNodes[1].value
-                    let sectionID = etatcours.value
-                    let insertData= {
-                         "carteId": dragged.childNodes[1].value,
-                         "sectionID": etatcours.value
-                    }
-                    // console.log(" je passe ligne 95")
-                    // formData.append(carteId, encodeURIComponent(carteId))
-                    // console.log(dragged.childNodes[1].value)
-                    // formData2.append(sectionID,encodeURIComponent(sectionID))
-                    formData.append("test",insertData)
-                    console.table(insertData)
-                    fetch('controller/Controller.php', {
-                        method: 'post',
-                        body: formData
-                    }).then(response => response.json)
-                        .then(res => console.log(res))
-                //     fetch('model/Todo.php',{
-                //         method: 'POST',
-                //         header:'Content-Type: application/json',
-                //         body:JSON.stringify({
-                //             carteId : dragged.childNodes[1].value,
-                //             sectionID : etatcours.value
-                //         })
-                // }).then(response => response.json).then(json => console.log(json))
+                if(dragged.parentNode.id == encours.id){
+                    let encours = 22
+                    formData.append("idCarte",encodeURIComponent(dragged.childNodes[1].value))
+                    formData.append("idSection",encodeURIComponent(encours))
+                    fetch('Class/Tache.php',{
+                        method:'POST',
+                        body:formData
+                    }).then((response)=>response.json)
+                    .then((result)=>console.log(result))
                 }
-            }
-
-        }, false);
+                else if (dragged.parentNode.id == termine.id) {
+                    let finTache = 33
+                    formData.append("idCarte",encodeURIComponent(dragged.childNodes[1].value))
+                    formData.append("idSection",encodeURIComponent(finTache))
+                    fetch('Class/Tache.php',{
+                        method:'POST',
+                        body:formData
+                    }).then((response)=>response.json)
+                    .then((result)=>console.log(result))
+                }
+              }
+            
+          }, false);
 
 
     }

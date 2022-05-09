@@ -47,7 +47,7 @@ public function inscription($login,$password,$nom,$prenom){
 
     ));
 }
-public static function inscriptionUser(){
+public function inscriptionUser(){
     if (isset($_POST["inscription"])) {
         if (empty($_POST['login'])||empty($_POST['nom'])||empty($_POST['prenom'])||empty($_POST['password'])) {
             echo "veuillez remplir tous les champs";

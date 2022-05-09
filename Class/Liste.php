@@ -52,8 +52,21 @@ public  function insertListe(){
 
 }
 
-
-
+public function getListe(){
+    $id_utilisateur = $_SESSION['user']['id'];
+    $selectListe = $this->bdd()->prepare("SELECT * FROM liste WHERE id_user=$id_utilisateur");
+    $selectListe->execute();
+    $result = $selectListe->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+public  function afficherListe(){
+    $id_user=$_SESSION['user']['id'];
+    $choixListe = new Liste;
+    $tabListe= $choixListe->getListe($id_user);
+    foreach ($tabListe as $liste) {?>
+       <option value=<?= $liste['id'] ?>><?= $liste['titre'] ?></option><?php
+    }
+}
 
 
 

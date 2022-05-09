@@ -1,7 +1,10 @@
 <?php
+session_start();
 require_once("Class/Liste.php");
+require_once("Class/Tache.php");
 $liste = new Liste;
 $liste->insertListe();
+$tache = new Tache;
 
 
 
@@ -25,14 +28,14 @@ $liste->insertListe();
     <form method="POST" class="listeForm" id="creationFormulaire">
         <input type="button" id="creerListe" value="creer liste">
         <select name="selectListe" id="">
-
+        <?php $liste->afficherListe() ?>
         </select>
         <input type="submit" name="choixListe">
     </form>
     <main id="todo">
 
         <section id="afaire"  class="dropzone">
-    
+        <?php $tache->afficheTodoListe() ?>
         
         </section>
         <section id="encours"  class="dropzone">

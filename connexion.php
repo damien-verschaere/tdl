@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once("Class/User.php");
 $user = new User;
 $user->connexionUser();
