@@ -24,7 +24,7 @@ $this->date;
 
 public function bdd(){
     $con='root';
-    $pass='';
+    $pass='root';
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=tdl',$con , $pass);
         return $bdd;
@@ -66,10 +66,34 @@ public function updateEtatTache($idCarte,$idSection){
         ":id"            =>$idCarte,
     ));
 
-    echo json_encode($_POST['idCarte']);
+    // echo json_encode();
+}
+public function addTache($titre,$description){
+    $insertTache = $this->bdd()->prepare("INSERT INTO `tache`(`id_liste`, `titre`, `descriptif`, `etat_tache`, `date`) VALUES (:id_liste,:titre,:description,:etat_tache,NOW())");
+    $insertTache->execute(array(
+        ':id_liste'=>$_SESSION['liste'][0]['id'],
+        ':titre' =>$titre,
+        ':description' => $description,
+        ':etat_tache'=>11
+    ));
+}
+public function enregistrementTache(){
+    // var_dump($_SESSION['liste'][0]['id']);
+    if (isset($_POST['ajoutTache'])) {
+        var_dump($_SESSION['liste'][0]['id']);
+        if (empty($_POST['titre']) && empty($_POST['description'])) {
+            echo 'veuillez remplir les champs';
+        }
+        else{
+         
+            $titre    = htmlspecialchars($_POST['titre']);
+            $description = htmlspecialchars($_POST['description']);
+        }
+        $tache = new Tache;
+        $tache ->addTache($titre,$description);
+    }
+}
 }
 
-
-}
 $test = new Tache;
-$test->updateEtatTache($_POST['idCarte'],$_POST['idSection']);
+@ $test->updateEtatTache($_POST['idCarte'],$_POST['idSection']);

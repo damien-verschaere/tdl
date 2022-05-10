@@ -7,9 +7,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const etatcours = document.querySelector("#etatEnCours")
     let formData = new FormData
     var dragged;
-
-
+    var modal = document.getElementById("myModal");
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
     // console.log(etatcours.value)
+
+
+    function addTache(){
+        btn.addEventListener("click",()=>{
+            modal.style.display = "block";
+        })
+    }
+    function spantest(){
+        span.addEventListener("click",()=>{
+            modal.style.display = "none";
+        })
+    }
+    function closeModal(){
+        window.addEventListener("click",()=>{
+            if (event.target == modal) {
+                modal.style.display = "none";
+              }
+        })
+    }
+    // addTache()
+    // spantest()
+    // closeModal()
     function creationListe() {
 
         let formulaire = document.getElementById("creationFormulaire")

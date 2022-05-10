@@ -30,13 +30,14 @@ nav ul  a {
     align-items: center;
     justify-content: center;
 }
-form input{
+.formInscription input{
     height: 20px;
     width: 200%;
     margin-top: 10%;
 }
 .mainHome{
     height: 100vh;
+    width: 100vh;
 }
 
 
@@ -52,6 +53,8 @@ form input{
     flex-direction: column;
     align-items: center;
     margin-top: 15%;
+    height: 20px;
+    width: 200%;
 }
 .signIn{
     height: 100vh;
@@ -77,10 +80,13 @@ form input{
     align-items: center;
     justify-content: space-evenly;
 }
-#afaire{
+#test{
     height: 50vh;
     width: 90%;
     background-color: rgb(225, 0, 255);
+    
+}
+#afaire{
     display: flex;
     
 }
@@ -139,3 +145,57 @@ footer{
     height: 150px;
     background-color: black;
 }
+/* ----------------------------------------- MODAL FORM AJOUT TACHE LISTE---------------------------------------------------------------- */
+
+
+
+/* The Modal (background) */
+.modal {
+    /* display: none; Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    height: 60vh;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  .modal-content h2{
+    text-align: center;
+  }
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .formTache{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 2%;
+  }
+  .formTache input{
+    width: 30vh ;
+    margin: 1%;
+  }

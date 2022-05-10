@@ -19,7 +19,7 @@ function __construct(){
 
 public function bdd(){
     $con='root';
-    $pass='';
+    $pass='root';
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=tdl',$con , $pass);
         return $bdd;
@@ -63,6 +63,7 @@ public  function afficherListe(){
     $id_user=$_SESSION['user']['id'];
     $choixListe = new Liste;
     $tabListe= $choixListe->getListe($id_user);
+    $_SESSION['liste']=$tabListe;
     foreach ($tabListe as $liste) {?>
        <option value=<?= $liste['id'] ?>><?= $liste['titre'] ?></option><?php
     }
