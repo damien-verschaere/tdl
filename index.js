@@ -1,38 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
-
     const creerListe = document.querySelector("#creerListe")
     const faire = document.querySelector("#afaire")
     const encours = document.querySelector("#encours")
     const termine = document.querySelector("#terminer")
-    const etatcours = document.querySelector("#etatEnCours")
     let formData = new FormData
     var dragged;
     var modal = document.getElementById("myModal");
     var btn = document.getElementById("myBtn");
     var span = document.getElementsByClassName("close")[0];
-    // console.log(etatcours.value)
+    var inputami = document.querySelector("#addfriend")
 
-
-    function addTache(){
-        btn.addEventListener("click",()=>{
-            modal.style.display = "block";
+   async function addfriend(){
+        inputami.addEventListener("keyup",()=>{
+            console.log(inputami.value)
+            let recherche = new FormData
+            recherche.append("addAmis",encodeURIComponent(inputami.value))
+            fetch("Class/User.php",{
+                method:'POST',
+                body:recherche,
+            }).then(reponse=> reponse).then(res=>console.log('Success:',res))
         })
     }
-    function spantest(){
-        span.addEventListener("click",()=>{
-            modal.style.display = "none";
-        })
-    }
-    function closeModal(){
-        window.addEventListener("click",()=>{
-            if (event.target == modal) {
-                modal.style.display = "none";
-              }
-        })
-    }
-    // addTache()
-    // spantest()
-    // closeModal()
+    
+   addfriend()
     function creationListe() {
 
         let formulaire = document.getElementById("creationFormulaire")
@@ -59,7 +49,23 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("je pass dans affichageform")
         })
     }
-
+    function addTache(){
+        btn.addEventListener("click",()=>{
+            modal.style.display = "block";
+        })
+    }
+    function spantest(){
+        span.addEventListener("click",()=>{
+            modal.style.display = "none";
+        })
+    }
+    function closeModal(){
+        window.addEventListener("click",()=>{
+            if (event.target == modal) {
+                modal.style.display = "none";
+              }
+        })
+    }
 
     function draganddrop() {
 
@@ -139,8 +145,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     }
+
     draganddrop()
     affichageForm()
-
+    addTache()
+    spantest()
+    closeModal()
 
 })

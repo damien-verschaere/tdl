@@ -18,7 +18,7 @@ function __construct(){
 }
 public function bdd(){
         $con='root';
-        $pass='root';
+        $pass='';
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=tdl',$con , $pass);
             return $bdd;
@@ -58,7 +58,7 @@ public function inscriptionUser(){
             echo "le login est deja utilisé";
         }
 
-        if ($_POST['password'] != $_POST['Vpassword']) {
+        elseif ($_POST['password'] != $_POST['Vpassword']) {
             echo "les MDP ne correspondent pas";
         }
         else {
@@ -68,6 +68,7 @@ public function inscriptionUser(){
             $prenom   = htmlspecialchars($_POST['prenom']);
             $user     = new User;
             $user->inscription($login,$password,$nom,$prenom);
+            header('location: ./connexion.php');
         }
     } 
 }
@@ -103,6 +104,15 @@ public function connexionUser(){
         }
     }
 }
-
+public function addFriend($login){
+    $login = $_POST['addAmis'];
+    $friend = $this->bdd()->prepare("SELECT * FROM user WHERE login LIKE '$login%' ");
+    $friend->execute();
+    $result= $friend->fetchAll(PDO::FETCH_ASSOC);
+   
+    echo json_encode($result);
+}
 
 }
+$user = new User;
+$user->addFriend($_POST['addAmis']);

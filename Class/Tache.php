@@ -24,7 +24,7 @@ $this->date;
 
 public function bdd(){
     $con='root';
-    $pass='root';
+    $pass='';
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=tdl',$con , $pass);
         return $bdd;
@@ -43,11 +43,62 @@ public function SelectToDo(){
     $result = $select->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
-public static function afficheTodoListe(){
+
+public function selectEtat11(){
+    $etat11 = $this->bdd()->prepare("SELECT * FROM tache WHERE id_liste = $_POST[selectListe] AND etat_tache = 11");
+    $etat11->execute();
+    $result = $etat11->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+public function selectEtat22(){
+    $etat22 = $this->bdd()->prepare("SELECT * FROM tache WHERE id_liste = $_POST[selectListe] AND etat_tache = 22");
+    $etat22->execute();
+    $result = $etat22->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+public function selectEtat33(){
+    $etat33 = $this->bdd()->prepare("SELECT * FROM tache WHERE id_liste = $_POST[selectListe] AND etat_tache = 33");
+    $etat33->execute();
+    $result = $etat33->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+public static function afficheEtat11(){
     if (isset($_POST['choixListe'])) {
             
             $choix    = new Tache;
-            $tab = $choix->SelectToDo($_POST['selectListe']);
+            $tab = $choix->selectEtat11($_POST['selectListe']);
+            foreach ($tab as $tache) {?>
+            <div class="card" id="draggable" draggable="true" ondragstart="">
+            <input type="hidden" name="idtache" value=<?= $tache['id'] ?>>
+            <h3><?= $tache['titre'] ?></h3>
+            <p><?= $tache['descriptif']?></p>
+            <p><?= $tache['date'] ?></p>
+            </div>
+            <?php
+        }
+    }
+}
+public static function afficheEtat22(){
+    if (isset($_POST['choixListe'])) {
+            
+            $choix    = new Tache;
+            $tab = $choix->selectEtat22($_POST['selectListe']);
+            foreach ($tab as $tache) {?>
+            <div class="card" id="draggable" draggable="true" ondragstart="">
+            <input type="hidden" name="idtache" value=<?= $tache['id'] ?>>
+            <h3><?= $tache['titre'] ?></h3>
+            <p><?= $tache['descriptif']?></p>
+            <p><?= $tache['date'] ?></p>
+            </div>
+            <?php
+        }
+    }
+}
+public static function afficheEtat33(){
+    if (isset($_POST['choixListe'])) {
+            
+            $choix    = new Tache;
+            $tab = $choix->selectEtat33($_POST['selectListe']);
             foreach ($tab as $tache) {?>
             <div class="card" id="draggable" draggable="true" ondragstart="">
             <input type="hidden" name="idtache" value=<?= $tache['id'] ?>>

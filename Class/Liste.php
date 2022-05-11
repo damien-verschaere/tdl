@@ -19,7 +19,7 @@ function __construct(){
 
 public function bdd(){
     $con='root';
-    $pass='root';
+    $pass='';
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=tdl',$con , $pass);
         return $bdd;

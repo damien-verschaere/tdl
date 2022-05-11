@@ -33,12 +33,10 @@ $tache->enregistrementTache()
         <input type="submit" name="choixListe">
     </form>
     <main id="todo">
-
-        <section id="test" class="dropzone">
-            <!-- <button id="myBtn">ajout Tache</button>
+    <button id="myBtn" class="ajoutache">ajouter Tache</button>
             <div id="myModal" class="modal">
                 <div class="modal-content">
-                    <span class="close">&times;</span> -->
+                    <span class="close">&times;</span>
                     <h2>AJOUT TACHE</h2>
                     <form class="formTache" method="POST"  >
                         <input type="text" class="titreTache" name="titre">
@@ -49,18 +47,18 @@ $tache->enregistrementTache()
                 </div>
 
             </div>
+        <section id="test" class="dropzone">
             <div id="afaire">
-                <?php $tache->afficheTodoListe() ?>
+                <?php $tache->afficheEtat11() ?>
             </div>
-
-
         </section>
         <section id="encours" class="dropzone">
-            <input id="etatEnCours" type="hidden" value="22">
+            <?php $tache->afficheEtat22() ?>
         </section>
         <section id="terminer" class="dropzone">
-
+        <?php $tache->afficheEtat33() ?>
         </section>
+        <input type="text" id="addfriend">
     </main>
     <footer>
 
