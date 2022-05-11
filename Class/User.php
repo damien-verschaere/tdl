@@ -16,9 +16,9 @@ function __construct(){
     $this->nom;
     $this->prenom;
 }
-public function bdd(){
+private function bdd(){
         $con='root';
-        $pass='';
+        $pass='root';
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=tdl',$con , $pass);
             return $bdd;
@@ -105,14 +105,18 @@ public function connexionUser(){
     }
 }
 public function addFriend($login){
-    $login = $_POST['addAmis'];
+    $login = htmlspecialchars($_POST['addAmis']);
     $friend = $this->bdd()->prepare("SELECT * FROM user WHERE login LIKE '$login%' ");
     $friend->execute();
     $result= $friend->fetchAll(PDO::FETCH_ASSOC);
    
     echo json_encode($result);
+    
 }
 
 }
 $user = new User;
-$user->addFriend($_POST['addAmis']);
+if (isset($_POST['addAmis'])) {
+    $user->addFriend($_POST['addAmis']);
+}
+   

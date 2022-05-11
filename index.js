@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const faire = document.querySelector("#afaire")
     const encours = document.querySelector("#encours")
     const termine = document.querySelector("#terminer")
+    var select = document.querySelector("#selectOptions")
     let formData = new FormData
     var dragged;
     var modal = document.getElementById("myModal");
@@ -10,19 +11,19 @@ document.addEventListener("DOMContentLoaded", () => {
     var span = document.getElementsByClassName("close")[0];
     var inputami = document.querySelector("#addfriend")
 
-   async function addfriend(){
-        inputami.addEventListener("keyup",()=>{
-            console.log(inputami.value)
-            let recherche = new FormData
-            recherche.append("addAmis",encodeURIComponent(inputami.value))
-            fetch("Class/User.php",{
-                method:'POST',
-                body:recherche,
-            }).then(reponse=> reponse).then(res=>console.log('Success:',res))
-        })
+    function getselectoption(){
+        
+        select.addEventListener("click",()=>{
+            let value= select.selectIndex
+            let data = new FormData
+            data.append("idListe",encodeURIComponent(value))
+            fetch("Class/Liste.php",{
+                method:"POST",
+                body:data
+            }).then(response =>response.json).then(resp => console.log(resp))
+        })  
     }
-    
-   addfriend()
+    getselectoption()
     function creationListe() {
 
         let formulaire = document.getElementById("creationFormulaire")

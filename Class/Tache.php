@@ -22,9 +22,9 @@ $this->date;
 
 }
 
-public function bdd(){
+private function bdd(){
     $con='root';
-    $pass='';
+    $pass='root';
     try {
         $bdd = new PDO('mysql:host=localhost;dbname=tdl',$con , $pass);
         return $bdd;

@@ -27,7 +27,7 @@ $tache->enregistrementTache()
     <?php require("./assets/template/header.php") ?>
     <form method="POST" class="listeForm" id="creationFormulaire">
         <input type="button" id="creerListe" value="creer liste">
-        <select name="selectListe" id="">
+        <select name="selectListe" id="selectOptions">
             <?php $liste->afficherListe() ?>
         </select>
         <input type="submit" name="choixListe">

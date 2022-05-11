@@ -6,22 +6,29 @@ header{
    
     height: 150px;
     width: 100%;
+    background-color: #39579a;
 }
 nav{
     height: 150px;
 }
-nav ul{
+nav ul {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
+    height: 150px;
 }
 li{
     color: black;
     margin: 2%;
-    list-style: none;
+    list-style: none;   
+}
+nav ul a li:hover{
+  color:#9a4b39;
 }
 nav ul  a {
-    margin: 2%;
+    
     text-decoration: none;
+    width: 200px;
 }
 
 .formInscription{
@@ -40,7 +47,9 @@ nav ul  a {
     width: 100vh;
 }
 
-
+.formListe h2 {
+    color: #9a4b39;
+}
 .formListe input{
     height: 80px;
     width: 100px;
@@ -53,7 +62,7 @@ nav ul  a {
     flex-direction: column;
     align-items: center;
     margin-top: 15%;
-    height: 20px;
+    height: auto;
     width: 200%;
 }
 .signIn{
@@ -103,9 +112,9 @@ nav ul  a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 70vh;
+    height: 30vh;
     margin-bottom: 3%;
-    margin-top: -10%;
+    margin-top: 5%;
     
 }
 #formulairecreation input{
@@ -115,9 +124,14 @@ nav ul  a {
 margin-top: 2%;
 margin-bottom: 2%;
 }
-#creationListe{
-    margin-top: 2%;
+#addListe{
+    margin: 2%;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    background-color: #399a4b;
 }
+
 #encours{
     height: 50vh;
     width: 90%;
