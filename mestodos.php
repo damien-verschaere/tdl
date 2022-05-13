@@ -30,7 +30,7 @@ $tache->enregistrementTache()
         <select name="selectListe" id="selectOptions">
             <?php $liste->afficherListe() ?>
         </select>
-        <input type="submit" name="choixListe">
+        <input type="button" id="buttonidListe" name="choixListe" value="afficher Liste">
     </form>
     <main id="todo">
     <button id="myBtn" class="ajoutache">ajouter Tache</button>
@@ -38,9 +38,10 @@ $tache->enregistrementTache()
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <h2>AJOUT TACHE</h2>
-                    <form class="formTache" method="POST"  >
+                    <form class="formTache" id="mafoi" method="POST"  >
+                        <input type="hidden" id="testid" name="id_liste">
                         <input type="text" class="titreTache" name="titre">
-                        <input type="text" class="description" name="description">
+                        <input type="text" class="description" name="descriptionS">
                         <input type="submit" name="ajoutTache">
                        
                     </form>
@@ -49,19 +50,19 @@ $tache->enregistrementTache()
             </div>
         <section id="test" class="dropzone">
             <div id="afaire">
-                <?php $tache->afficheEtat11() ?>
+                
             </div>
         </section>
         <section id="encours" class="dropzone">
-            <?php $tache->afficheEtat22() ?>
+           
         </section>
         <section id="terminer" class="dropzone">
-        <?php $tache->afficheEtat33() ?>
+        
         </section>
-        <input type="text" id="addfriend">
     </main>
     <footer>
-
+        <img src="" alt="github logo damien verschaere">
+        <img src="" alt="linkedin logo damien verschaere">
     </footer>
 </body>
 

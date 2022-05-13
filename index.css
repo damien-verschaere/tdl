@@ -18,7 +18,7 @@ nav ul {
     height: 150px;
 }
 li{
-    color: black;
+    color: white;
     margin: 2%;
     list-style: none;   
 }
@@ -92,12 +92,16 @@ nav ul  a {
 #test{
     height: 50vh;
     width: 90%;
-    background-color: rgb(225, 0, 255);
-    
+    background-color: #9a4b39;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 #afaire{
     display: flex;
-    
+    align-items: center;
+    margin-left: 2%;
 }
 .listeForm{
     display: flex;
@@ -135,8 +139,7 @@ margin-bottom: 2%;
 #encours{
     height: 50vh;
     width: 90%;
-    background-color: rgb(72, 0, 255);
-    margin-top: 2%;
+    background-color: #9a4b39;
     margin-bottom: 2%;
     display: flex;
     flex-wrap: wrap;
@@ -144,24 +147,37 @@ margin-bottom: 2%;
 #terminer{
     height: 50vh;
     width: 90%;
-    background-color: rgb(0, 30, 255);
-    margin-bottom: 1%;
+    background-color: #9a4b39;
+    margin-bottom: 2%;
     display: flex;
     flex-wrap: wrap;
 }
 .card{
-    height:100px;
-    border: 2px solid black;
+    height:120px;
+    border: 2px solid #355834;
     width:110px ;
     margin: 2%;
-    background-color: white;
+    background-color: #39579a;
+    display: flex;
+    
+    flex-direction: column;
 }
-.card p,.card h3 {
+.card p,.card h2 {
     text-align: center;
+    color : white;
+}
+.card button{
+    text-align: center;
+    margin-top: 10%;
+    width: 100%;
+}
+.delete{
+    height:30%;
 }
 footer{
+    margin-top: 5%;
     height: 150px;
-    background-color: black;
+    background-color: #39579a;
 }
 /* ----------------------------------------- MODAL FORM AJOUT TACHE LISTE---------------------------------------------------------------- */
 
