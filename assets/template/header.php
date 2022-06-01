@@ -8,7 +8,7 @@
             } ?>                                   
             <?php if (isset($_SESSION['user'])) {?>
                 <a href="mestodos"><li>MES TODOS</li></a>
-                <a href=""><li>ADMIN</li></a><?php
+                <a href="deco"><li>DECONNEXION</li></a><?php
             }?>
                 
                 

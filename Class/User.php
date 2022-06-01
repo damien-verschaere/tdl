@@ -49,7 +49,8 @@ public function inscription($login,$password,$nom,$prenom){
 }
 public function inscriptionUser(){
     if (isset($_POST["inscription"])) {
-        if (empty($_POST['login'])||empty($_POST['nom'])||empty($_POST['prenom'])||empty($_POST['password'])) {
+        echo "bijour52";
+        if (empty($_POST['login']) || empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['password'])) {
             echo "veuillez remplir tous les champs";
         }
         $u = new User;
@@ -96,7 +97,7 @@ public function connexionUser(){
             $connexionUser = $user->connexion($_POST['login']);
             if(password_verify(htmlspecialchars($_POST['password'],ENT_QUOTES,"ISO-8859-1"),$connexionUser['password'])) {
                 $_SESSION['user'] = $connexionUser ; 
-                header('location: ./index.php');
+                header('location: ./mestodos.php');
             }
             else{
                 echo "login ou mdp incorrect";

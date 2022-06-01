@@ -3,26 +3,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const faire = document.querySelector("#afaire")
     const encours = document.querySelector("#encours")
     const termine = document.querySelector("#terminer")
+    const supprimer = document.querySelector("#delete")
+    let adTache = document.querySelector("#ajoutTache")
     let formData = new FormData
     var dragged;
     var modal = document.getElementById("myModal");
     var btn = document.getElementById("myBtn");
     var span = document.getElementsByClassName("close")[0];
-    let test = new FormData
-
-
-
-
     var select = document.querySelector("#selectOptions")
-
     
-    function affichageListe() {
+
+
+    function ajoutTache() {
+        adTache.addEventListener("click", () => {
+            
+            let valeurTitre = document.querySelector("#testtache").value
+            let id = document.querySelector("#testid").value
+            let descr = document.querySelector("#testdesc").value
+            let form = new FormData
+            form.append("id_liste", id)
+            form.append("titre", valeurTitre)
+            form.append("description", descr)
+            fetch("Class/Tache.php?complete=1", {
+                method: "POST",
+                body: form,
+            }).then(response => response.json)
+               
+        })
+
+    }
+
+function affiche2(){
         let div = document.getElementById("afaire")
         let div2 = document.getElementById("encours")
-        let div3 = document.getElementById("terminer")
-        var afficheListe = document.getElementById("buttonidListe")
-        afficheListe.addEventListener("click", () => {
-
+        let div3 = document.getElementById("terminer") 
+        let selected = document.getElementById("selectOptions")
+        selected.addEventListener("change",()=>{
             div.innerHTML = ""
             div2.innerHTML = ""
             div3.innerHTML = ""
@@ -34,43 +50,37 @@ document.addEventListener("DOMContentLoaded", () => {
             let formated = new FormData
 
             formated.append("selectListe", encodeURIComponent(datas))
-            fetch("Class/Tache.php", {
+            //genere les divs dans les div catégories
+            fetch("Class/Tache.php?complete=2", {
                 method: "POST",
                 body: formated
             }).then(response => response.json())
+            
                 .then(respons => respons.forEach(element => {
-                    let drag = document.getElementById("draggable")
+                    // console.table(respons)
+                    
                     if (element.etat_tache == 11) {
-                        console.log("ligne 39 ")
+                        // console.log("ligne 39 ")
                         // div.remove(drag)
 
-                        div.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden" id="idCarte" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><input type="hidden" value="${element.etat_tache}><input type="text" value="${element.id_liste}"><button class="supp">delete</button></div>`
+                        div.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden" id="idCarte" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><input type="hidden" value="${element.etat_tache}><input type="text" value="${element.id_liste}"></div>`
                     }
-                    
+
                     if (element.etat_tache == 22) {
                         // div2.remove(drag)
-                        div2.innerHTML = `<div id ="draggable" draggable = true class="card"><input type="hidden"  id="idCarte" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><input type="hidden"  value="${element.etat_tache}<input type="text" value="${element.id_liste}"><button class="supp">delete</button></div>`
+                        div2.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden"  id="idCarte" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><input type="hidden"  value="${element.etat_tache}<input type="text" value="${element.id_liste}"></div>`
                     }
                     if (element.etat_tache == 33) {
                         // div3.remove(drag)
-                        div3.innerHTML = `<div id ="draggable" draggable = true class="card"><input type="hidden"  id="idCarte" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><input type="hidden"  value="${element.etat_tache}<input type="text" value="${element.id_liste}"><input type="button" value=delete id="supp"></div>`
+                        div3.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden"  id="idCarte33" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><p>${element.date_fin}</p><input type="hidden"  value="${element.etat_tache}<input type="text" value="${element.id_liste}"></div>`
                     }
-                    ()=>{
-                        let suppTache = document.getElementById('supp')
-                        suppTache.addEventListener("click",()=>{
-                            
-                            test.append("idTache",encodeURIComponent(element.id))
-                            fetch("class/Tache.php",{
-                                method:"POST",
-                                body:test
-                            }).then(response=>console.log(response.json()))
-                     
-                        })
-                    }
+                   
+
                 }))
         })
+     
     }
-    affichageListe()
+   affiche2()
     function creationListe() {
 
         let formulaire = document.getElementById("creationFormulaire")
@@ -100,14 +110,62 @@ document.addEventListener("DOMContentLoaded", () => {
     function addTache() {
         btn.addEventListener("click", () => {
             modal.style.display = "block";
+            document.getElementById("selectOptions").value
+            
         })
     }
     function spantest() {
+        let essaie = document.getElementById('ajoutTache')
         span.addEventListener("click", () => {
             modal.style.display = "none";
         })
+        essaie.addEventListener("click", () => {
+            modal.style.display = "none";
+            let div = document.getElementById("afaire")
+            let div2 = document.getElementById("encours")
+            let div3 = document.getElementById("terminer") 
+            let selected = document.getElementById("selectOptions").value
+        console.log(selected +"L129")
+        div.innerHTML = ""
+        div2.innerHTML = ""
+        div3.innerHTML = ""
+        hidden = document.getElementById("testid")
+        let value = selected
+        hidden.value = value
+        let datas = hidden.value
+        let formated = new FormData
+        formated.append("selectListe", encodeURIComponent(datas))
+        fetch("Class/Tache.php?complete=2", {
+            method: "POST",
+                body: formated
+            }).then(response => response.json())
+            
+            .then(respons => respons.forEach(element => {
+                
+                if (element.etat_tache == 11) {
+                    // console.log("ligne 39 ")
+                    // div.remove(drag)
+
+                    div.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden" id="idCarte" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><input type="hidden" value="${element.etat_tache}><input type="text" value="${element.id_liste}"></div>`
+                }
+
+                if (element.etat_tache == 22) {
+                    // div2.remove(drag)
+                    div2.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden"  id="idCarte" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><input type="hidden"  value="${element.etat_tache}<input type="text" value="${element.id_liste}"></div>`
+                }
+                if (element.etat_tache == 33) {
+                    // div3.remove(drag)
+                    div3.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden"  id="idCarte33" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><p>${element.date_fin}</p><input type="hidden"  value="${element.etat_tache}<input type="text" value="${element.id_liste}"></div>`
+                }
+               
+
+            }))
+        })
+        
     }
     function closeModal() {
+        
+        
         window.addEventListener("click", () => {
             if (event.target == modal) {
                 modal.style.display = "none";
@@ -164,30 +222,39 @@ document.addEventListener("DOMContentLoaded", () => {
                 event.target.style.background = "";
                 dragged.parentNode.removeChild(dragged);
                 event.target.appendChild(dragged);
-                //   console.log(dragged.parentNode.id)
+                   console.log(dragged.childNodes[0].value)
 
 
-                console.log(idcarte.value)
+                
                 if (dragged.parentNode.id == encours.id) {
                     let encours = 22
-                    console.log(dragged.childNodes[1].value)
-                    formData.append("idCarte", encodeURIComponent(idcarte.value))
+                    console.log()
+                    formData.append("idCarte", encodeURIComponent(dragged.childNodes[0].value))
                     formData.append("idSection", encodeURIComponent(encours))
-                    fetch('Class/Tache.php', {
+                    fetch('Class/Tache.php?complete=3', {
                         method: 'POST',
                         body: formData
-                    }).then((response) => response.json)
+                    }).then((response) => response.json())
                         .then((result) => console.log(result))
                 }
-                else if (dragged.parentNode.id == termine.id) {
+                if (dragged.parentNode.id == termine.id) {
                     let finTache = 33
-                    formData.append("idCarte", encodeURIComponent(idcarte.value))
+                    formData.append("idCarte", encodeURIComponent(dragged.childNodes[0].value))
                     formData.append("idSection", encodeURIComponent(finTache))
-                    fetch('Class/Tache.php', {
+                    fetch('Class/Tache.php?complete=3', {
                         method: 'POST',
                         body: formData
-                    }).then((response) => response.json)
-                        .then((result) => console.log(result))
+                    }).then((response) => response.json())
+                    .then((result) => console.log(result))
+                }
+                if(dragged.parentNode.id == supprimer.id){
+                    formData.append("id",encodeURIComponent(dragged.childNodes[0].value))
+                    fetch('Class/Tache.php?complete=4', {
+                        method: 'POST',
+                        body: formData
+                    }).then((response) => response.json())
+                    .then((result) => console.log(result))
+                    supprimer.innerHTML="<img src=assets/image/delete.png alt=supprimer tache damien verschaere >"
                 }
             }
 
@@ -196,11 +263,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
     
+
+
+    function getselect(){
+        let user = document.querySelector("#idUser").value
+        // console.log(user)
+        formData.append("idUser",encodeURIComponent(user))
+        fetch("Class/Liste.php?complete=5",{
+            method:"POST",
+            body:formData
+        }).then(reponse=>reponse.json()).then(rep=>
+            rep.forEach(element => {           
+               select.innerHTML += `<option id=essaieTest value=${element.id}>${element.titre}</option>`
+            }))
+    }
+
+
     
+
+    getselect()
+    ajoutTache()
     draganddrop()
     affichageForm()
     addTache()
     spantest()
     closeModal()
-    // getselectoption()
+    
 })

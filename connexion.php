@@ -2,7 +2,7 @@
 session_start();
 require_once("Class/User.php");
 $user = new User;
-$user->connexionUser();
+
 // var_dump($_SESSION['user']);
 ?>
 
@@ -28,12 +28,8 @@ $user->connexionUser();
                 <input type="text" placeholder="login" name="login">
                 <input type="password" placeholder="password" name="password">
                 <input type="submit" value="connexion" name="connexion">
+               <?php $user->connexionUser();?>
             </form>
         </div>
     </main>
-    <footer>
-        
-    </footer>
-</body>
-
-</html>
+    <?php require("assets/template/footer.php"); ?>

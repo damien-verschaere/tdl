@@ -1,7 +1,7 @@
 <?php
 require_once("Class/User.php");
 $inscription = new User;
-$inscription->inscriptionUser()
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -25,12 +25,9 @@ $inscription->inscriptionUser()
                 <input type="text" placeholder="nom" name="nom">
                 <input type="text" placeholder="prenom" name="prenom">
                 <input type="password" placeholder="verify password" name="Vpassword">
-                
                 <input type="submit" value="s'inscrire" name="inscription">
+				<?php $inscription->inscriptionUser()?>
             </form>
         </div>
     </main>
-    <footer></footer>
-</body>
-
-</html>
+    <?php require("assets/template/footer.php"); ?>

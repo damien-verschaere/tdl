@@ -48,31 +48,38 @@ public  function insertListe(){
     }
         $liste = new Liste;
         $liste ->creerListe($id_user,$titre);
+        echo "la liste a bien été crée";
     }
 
 }
 
-public function getListe(){
-    $id_utilisateur = $_SESSION['user']['id'];
-    $selectListe = $this->bdd()->prepare("SELECT * FROM liste WHERE id_user=$id_utilisateur");
-    $selectListe->execute();
+public function getListe($id_user){
+
+    $selectListe = $this->bdd()->prepare("SELECT * FROM liste WHERE id_user=:idUser");
+    $selectListe->execute(array(
+        "idUser"=>$id_user,
+    ));
     $result = $selectListe->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
+    echo json_encode($result);
 }
-public  function afficherListe(){
-    $id_user=$_SESSION['user']['id'];
-    $choixListe = new Liste;
-    $tabListe= $choixListe->getListe($id_user);
-    $_SESSION['liste']=$tabListe;
-    foreach ($tabListe as $liste) {?>
-       <option value=<?= $liste['id'] ?>><?= $liste['titre'] ?></option><?php
+// public  function afficherListe(){
+//     $id_user=$_SESSION['user']['id'];
+//     $choixListe = new Liste;
+//     $tabListe= $choixListe->getListe($id_user);
+//     $_SESSION['liste']=$tabListe;
+//     foreach ($tabListe as $liste) {
+
+//     }
+// }
+
+
+
+
+
+
+
+}
+if( @ $_GET['complete']==5){
+    $test = new liste;
+    @ $test -> getListe($_POST['idUser']);
     }
-}
-
-
-
-
-
-
-
-}

@@ -1,6 +1,5 @@
 <?php 
 session_start();
-// var_dump( $_SESSION['liste']);
 
 ?>
 
@@ -17,14 +16,14 @@ session_start();
 <body>
    <?php require "assets/template/header.php"  ?>
     <main class="mainHome">
-    <div class="formListe" id="creationListe" >
-        <h2>CREER UNE LISTE A TODOS</h2>
-        <button id="addListe">+</button>
-</div>
+        <?php if (!empty($_SESSION['user'])) {?>
+           <h2>BIENVENUE</h2> <?= "<h2>".$_SESSION['user']['login']."</h2>" ?><?php
+        }
+        else {?>
+            <h3>VEUILLEZ VOUS CONNECTEZ OU VOUS INSCRIRE</h3>
+       <?php }?>
+        
+
     </main>
    
-    <footer>
-
-    </footer>
-</body>
-</html>
+    <?php require("assets/template/footer.php"); ?>
