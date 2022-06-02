@@ -11,12 +11,22 @@ document.addEventListener("DOMContentLoaded", () => {
     var btn = document.getElementById("myBtn");
     var span = document.getElementsByClassName("close")[0];
     var select = document.querySelector("#selectOptions")
-    
+    let cacher = document.querySelector('#hide')
 
+    function hidden() {
+        cacher.style.display = "none"
+        select.addEventListener("change", () => {
+            cacher.style.display = ""
+            let valid = document.querySelector("#validation")
+            let testing = document.querySelector("#formulairecreation")
+            valid.innerHTML=""
+            testing.remove(testing)
+        })
+    }
 
     function ajoutTache() {
         adTache.addEventListener("click", () => {
-            
+
             let valeurTitre = document.querySelector("#testtache").value
             let id = document.querySelector("#testid").value
             let descr = document.querySelector("#testdesc").value
@@ -28,17 +38,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 method: "POST",
                 body: form,
             }).then(response => response.json)
-               
+
         })
 
     }
 
-function affiche2(){
+    function affiche2() {
         let div = document.getElementById("afaire")
         let div2 = document.getElementById("encours")
-        let div3 = document.getElementById("terminer") 
+        let div3 = document.getElementById("terminer")
         let selected = document.getElementById("selectOptions")
-        selected.addEventListener("change",()=>{
+        selected.addEventListener("change", () => {
             div.innerHTML = ""
             div2.innerHTML = ""
             div3.innerHTML = ""
@@ -55,10 +65,10 @@ function affiche2(){
                 method: "POST",
                 body: formated
             }).then(response => response.json())
-            
+
                 .then(respons => respons.forEach(element => {
                     // console.table(respons)
-                    
+
                     if (element.etat_tache == 11) {
                         // console.log("ligne 39 ")
                         // div.remove(drag)
@@ -74,13 +84,13 @@ function affiche2(){
                         // div3.remove(drag)
                         div3.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden"  id="idCarte33" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><p>${element.date_fin}</p><input type="hidden"  value="${element.etat_tache}<input type="text" value="${element.id_liste}"></div>`
                     }
-                   
+
 
                 }))
         })
-     
+
     }
-   affiche2()
+
     function creationListe() {
 
         let formulaire = document.getElementById("creationFormulaire")
@@ -111,7 +121,7 @@ function affiche2(){
         btn.addEventListener("click", () => {
             modal.style.display = "block";
             document.getElementById("selectOptions").value
-            
+
         })
     }
     function spantest() {
@@ -123,49 +133,46 @@ function affiche2(){
             modal.style.display = "none";
             let div = document.getElementById("afaire")
             let div2 = document.getElementById("encours")
-            let div3 = document.getElementById("terminer") 
+            let div3 = document.getElementById("terminer")
             let selected = document.getElementById("selectOptions").value
-        console.log(selected +"L129")
-        div.innerHTML = ""
-        div2.innerHTML = ""
-        div3.innerHTML = ""
-        hidden = document.getElementById("testid")
-        let value = selected
-        hidden.value = value
-        let datas = hidden.value
-        let formated = new FormData
-        formated.append("selectListe", encodeURIComponent(datas))
-        fetch("Class/Tache.php?complete=2", {
-            method: "POST",
+            div.innerHTML = ""
+            div2.innerHTML = ""
+            div3.innerHTML = ""
+            hidden = document.getElementById("testid")
+            let value = selected
+            hidden.value = value
+            let datas = hidden.value
+            let formated = new FormData
+            formated.append("selectListe", encodeURIComponent(datas))
+            fetch("Class/Tache.php?complete=2", {
+                method: "POST",
                 body: formated
             }).then(response => response.json())
-            
-            .then(respons => respons.forEach(element => {
-                
-                if (element.etat_tache == 11) {
-                    // console.log("ligne 39 ")
-                    // div.remove(drag)
 
-                    div.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden" id="idCarte" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><input type="hidden" value="${element.etat_tache}><input type="text" value="${element.id_liste}"></div>`
-                }
+                .then(respons => respons.forEach(element => {
 
-                if (element.etat_tache == 22) {
-                    // div2.remove(drag)
-                    div2.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden"  id="idCarte" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><input type="hidden"  value="${element.etat_tache}<input type="text" value="${element.id_liste}"></div>`
-                }
-                if (element.etat_tache == 33) {
-                    // div3.remove(drag)
-                    div3.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden"  id="idCarte33" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><p>${element.date_fin}</p><input type="hidden"  value="${element.etat_tache}<input type="text" value="${element.id_liste}"></div>`
-                }
-               
+                    if (element.etat_tache == 11) {
+                        // console.log("ligne 39 ")
+                        // div.remove(drag)
 
-            }))
+                        div.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden" id="idCarte" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><input type="hidden" value="${element.etat_tache}><input type="text" value="${element.id_liste}"></div>`
+                    }
+
+                    if (element.etat_tache == 22) {
+                        // div2.remove(drag)
+                        div2.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden"  id="idCarte" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><input type="hidden"  value="${element.etat_tache}<input type="text" value="${element.id_liste}"></div>`
+                    }
+                    if (element.etat_tache == 33) {
+                        // div3.remove(drag)
+                        div3.innerHTML += `<div id ="draggable" draggable = true class="card"><input type="hidden"  id="idCarte33" value=${element.id}><h2>${element.titre}</h2><p>${element.descriptif}</p><p>${element.date}</p><p>${element.date_fin}</p><input type="hidden"  value="${element.etat_tache}<input type="text" value="${element.id_liste}"></div>`
+                    }
+
+
+                }))
         })
-        
+
     }
     function closeModal() {
-        
-        
         window.addEventListener("click", () => {
             if (event.target == modal) {
                 modal.style.display = "none";
@@ -174,26 +181,17 @@ function affiche2(){
     }
 
     function draganddrop() {
-
         document.addEventListener("drag", function (event) {
-
         }, false);
-
         document.addEventListener("dragstart", function (event) {
-            // store a ref. on the dragged elem
             dragged = event.target;
-            // make it half transparent
             event.target.style.opacity = .5;
         }, false);
-
         document.addEventListener("dragend", function (event) {
-            // reset the transparency
+          
             event.target.style.opacity = "";
         }, false);
-
-        /* events fired on the drop targets */
         document.addEventListener("dragover", function (event) {
-            // prevent default to allow drop
             event.preventDefault();
         }, false);
 
@@ -222,10 +220,10 @@ function affiche2(){
                 event.target.style.background = "";
                 dragged.parentNode.removeChild(dragged);
                 event.target.appendChild(dragged);
-                   console.log(dragged.childNodes[0].value)
+                console.log(dragged.childNodes[0].value)
 
 
-                
+
                 if (dragged.parentNode.id == encours.id) {
                     let encours = 22
                     console.log()
@@ -245,16 +243,16 @@ function affiche2(){
                         method: 'POST',
                         body: formData
                     }).then((response) => response.json())
-                    .then((result) => console.log(result))
+                        .then((result) => console.log(result))
                 }
-                if(dragged.parentNode.id == supprimer.id){
-                    formData.append("id",encodeURIComponent(dragged.childNodes[0].value))
+                if (dragged.parentNode.id == supprimer.id) {
+                    formData.append("id", encodeURIComponent(dragged.childNodes[0].value))
                     fetch('Class/Tache.php?complete=4', {
                         method: 'POST',
                         body: formData
                     }).then((response) => response.json())
-                    .then((result) => console.log(result))
-                    supprimer.innerHTML="<img src=assets/image/delete.png alt=supprimer tache damien verschaere >"
+                        .then((result) => console.log(result))
+                    supprimer.innerHTML = "<img src=assets/image/delete.png alt=supprimer tache damien verschaere >"
                 }
             }
 
@@ -262,25 +260,22 @@ function affiche2(){
 
 
     }
-    
-
-
-    function getselect(){
+    function getselect() {
         let user = document.querySelector("#idUser").value
         // console.log(user)
-        formData.append("idUser",encodeURIComponent(user))
-        fetch("Class/Liste.php?complete=5",{
-            method:"POST",
-            body:formData
-        }).then(reponse=>reponse.json()).then(rep=>
-            rep.forEach(element => {           
-               select.innerHTML += `<option id=essaieTest value=${element.id}>${element.titre}</option>`
+        formData.append("idUser", encodeURIComponent(user))
+        fetch("Class/Liste.php?complete=5", {
+            method: "POST",
+            body: formData
+        }).then(reponse => reponse.json()).then(rep =>
+            rep.forEach(element => {
+                select.innerHTML += `<option id=essaieTest value=${element.id}>${element.titre}</option>`
             }))
     }
 
 
-    
-
+    affiche2()
+    hidden()
     getselect()
     ajoutTache()
     draganddrop()
@@ -288,5 +283,5 @@ function affiche2(){
     addTache()
     spantest()
     closeModal()
-    
+
 })
